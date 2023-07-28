@@ -6,11 +6,13 @@
         </div>
         <h2 class="subtitle">Haz una lista de tareas de forma sencilla con tan solo 4 tareas 👀</h2>
         <div class="cards-wrapper">
-            <div class="card-wrapper" v-for="card in this.cards" :key="card.id">
+            <div class="card-wrapper" v-for="card in cards" :key="card.id">
                 <card :title="card.title" :description="card.description"></card>
             </div>
         </div>
-        <button class="cta-landing">COMENCEMOS 🚀</button>
+        <router-link to="/app-page">
+            <button class="cta-landing">COMENCEMOS 🚀</button>
+        </router-link>
     </div>
 </template>
 
