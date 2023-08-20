@@ -10,7 +10,7 @@
                 <card :title="card.title" :description="card.description"></card>
             </div>
         </div>
-        <router-link to="/app-page">
+        <router-link to="/app-page" class="button-wrapper">
             <button class="cta-landing">COMENCEMOS 🚀</button>
         </router-link>
     </div>
@@ -88,7 +88,11 @@ export default {
         gap: 20px;
     }
 
-    .cta-landing {
+    .button-wrapper{
+        display: flex;
+        justify-content: center;
+        text-decoration: none;
+        .cta-landing {
         border-radius: 6px;
         background: linear-gradient(90deg, #12C891 0%, #C206A4 100%);
         box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.20);
@@ -99,6 +103,7 @@ export default {
         padding:22px 22px;
         border: none;
         margin: 25px 35px;
+    }
     }
 }
 </style>

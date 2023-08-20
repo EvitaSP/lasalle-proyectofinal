@@ -1,38 +1,54 @@
 <template>
     <div class="crud-functions">
-        <h1 class="read-title">MI LISTA</h1>
-        <div class="create">
-            <input type="text" class="create-input" placeholder="Nombre de la tarea" v-model="tarea"
-                @keyup.enter="agregarTarea">
-            <button class="create-button" @click="agregarTarea">CREAR</button>
+        <router-link to="/" style="height: 0; display: block">
+            <img src="../assets/instructions.svg" alt="instructios icon" class="instructions-icon">
+        </router-link>
+        <div class="title-wrapper">
+            <img class="check-icon" src="../assets/check.svg" />
+            <h1 class="title">TO DO LIST</h1>
         </div>
-        <div class="read">
-            <ul class="lista-tareas">
-                <li class="lista-tarea" v-for="(tarea, index) in tareas" :key="index">{{ tarea }}
-                    <img src="../assets/delete.png" alt="" class="delete-icon" @click="borrarTarea(index)">
-                </li>
-            </ul>
+        <div class="boxes-wrapper" :class="{'boxes-wrapper-crear': isCrearClicked}">
+            <div class="box-wrapper">
+                <blackBox :title="'CREAR'" @click="crear()" :class="{crear: isCrearClicked}"/>
+                <blackBox :title="'VER'" @click="ver()"/>
+                <blackBox :title="'ACTUALIZAR'" @click="actualizar()"/>
+                <blackBox :title="'BORRAR'" @click="borrar()"/>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+import blackBox from '../components/appPage/blackBox.vue'
 export default {
+    components: {
+        blackBox
+    },
     data() {
         return {
-            tarea: '',
-            tareas: []
+            isCrearClicked: false,
+            isVerClicked: false,
+            isActualizarClicked: false,
+            isBorrarClicked: false
         };
     },
     methods: {
-        agregarTarea() {
-            if (this.tarea !== '') {
-                this.tareas.push(this.tarea)
-                this.tarea = ''
+        crear() {
+            if (this.isCrearClicked === false) {
+                this.isCrearClicked = true,
+                this.isVerClicked = false,
+                this.isActualizarClicked = false,
+                this.isBorrarClicked = false
             }
         },
-        borrarTarea(index) {
-            this.tareas.splice(index, 1);
+        ver() {
+
+        },
+        actualizar() {
+
+        },
+        borrar() {
+
         }
     }
 }
@@ -42,60 +58,35 @@ export default {
 .crud-functions {
     background: var(--fondo, linear-gradient(180deg, #12C891 0%, #9C0064 99.98%, #696969 99.99%, #9C0064 100%));
     height: 100vh;
-    .read-title {
-            color: #FFF;
-            font-size: 26px;
-            font-family: 'Montserrat';
-            font-weight: 700;
-            margin:initial;
-            margin-bottom:20px;
-            padding-top:20px;
-            text-align: center;
-        }
 
-    .create {
+    .instructions-icon {
+        padding: 10px 0 0 10px;
+    }
+
+    .title-wrapper {
         display: flex;
-        flex-direction: column;
-        gap:15px;
-        padding-left:20px;
-        input{
-            border-radius: 2px;
-            width: fit-content;
-            min-width: 60px;
-            border:none;
-            min-height:25px;
+        gap: 15px;
+        justify-content: center;
+        align-items: center;
+        min-height: 115px;
+
+        .title {
+            color: #FFF;
+            font-family: Montserrat;
+            font-size: 35px;
+            font-weight: 700;
+            margin: initial;
         }
 
-        button {
-            border-radius: 6px;
-            background: blueviolet;
-            width: fit-content;
-            box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.20);
-            color: white;
-            font-size: 13px;
-            font-family: Montserrat;
-            font-weight: 700;
-            padding: 7px 10px;
-            border: none;
+        img {
+            width: 30px;
         }
     }
 
-    .read {
-        ul {
-            padding:initial;
-            padding-left:20px;
-            li{
-                font-family: Montserrat;
-                font-size:16px;
-                color:#FFF;
-                list-style: none;
-                margin-bottom:5px;
-                
-            }
-            img {
-                width: 20px;
-            }
-        }
+    .boxes-wrapper {
+        display: grid;
+        grid-template-rows: repeat(4, 1fr);
+        height: calc(100% - 124px);
     }
 }
 </style>
